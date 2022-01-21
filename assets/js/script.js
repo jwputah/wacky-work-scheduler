@@ -1,10 +1,11 @@
-// jquery function for current date and time
+// jquery function for current date and time with moment
 $(document).ready(function () {
-    $("#currentDay").text(moment().format('MMMM Do YYYY, h:mm:ss a'));
+    var currentTime = moment().format('MMMM Do YYYY, h:mm a');
+
+    $("#currentDay").append(currentTime);
 
     // jquery event listener
     $(".saveBtn").on("click", function () {
-        console.log(this);
 
         var text = $(this).siblings(".description").val();
         var time = $(this).parent().attr("id");
@@ -13,14 +14,38 @@ $(document).ready(function () {
     })
 
     // saved data from local storage
-    $("#9am .description").val(localStorage.getItem("9am"));
-    $("#10am .description").val(localStorage.getItem("10am"));
-    $("#11am .description").val(localStorage.getItem("11am"));
-    $("#12pm .description").val(localStorage.getItem("12pm"));
-    $("#1pm .description").val(localStorage.getItem("1pm"));
-    $("#2pm .description").val(localStorage.getItem("2pm"));
-    $("#3pm .description").val(localStorage.getItem("3pm"));
-    $("#4pm .description").val(localStorage.getItem("4pm"));
-    $("#5pm .description").val(localStorage.getItem("5pm"));
+    $("#hour9 .description").val(localStorage.getItem("hour9"));
+    $("#hour10 .description").val(localStorage.getItem("hour10"));
+    $("#hour11 .description").val(localStorage.getItem("hour11"));
+    $("#hour12 .description").val(localStorage.getItem("hour12"));
+    $("#hour13 .description").val(localStorage.getItem("hour13"));
+    $("#hour14 .description").val(localStorage.getItem("hour14"));
+    $("#hour15 .description").val(localStorage.getItem("hour15"));
+    $("#hour16 .description").val(localStorage.getItem("hour16"));
+    $("#hour17 .description").val(localStorage.getItem("hour17"));
+    console.log(localStorage);
+
+    // function for current time to display colors in css for past, present and future
+    function timeBlocks () {
+        var currentHour = moment().hours();
+        console.log("current time",  currentHour);
+        $(".time-block").each(function () {
+            var time = parseInt($(this).attr("id").split("hour")[1]);
+            console.log(time);
+
+            if (time < currentHour) {
+                $(this).addClass("past")
+            
+            } else if (time === currentHour) {
+                $(this).addClass("present")
+
+            } else {
+                $(this).addClass("future")
+            }
+        })
+    }
+    timeBlocks()
 })
+
+
 

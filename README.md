@@ -8,7 +8,9 @@ And the text is saved in local storage.
 
 ## Built With
 
-HTML <br> css <br> javascript
+* HTML
+* CSS
+* JavaScript
 
 ## Deployed Page
 
